@@ -1,18 +1,17 @@
 /*
- * Copyright (c) 2013 Samsung Electronics Co., Ltd All Rights Reserved
+ * Copyright (c) 2013 Samsung Electronics Co., Ltd. All rights reserved.
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
+ * Licensed under the Flora License, Version 1.1 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *     http://floralicense.org/license/
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 #ifndef __EFL_EXTENSION_EVENTS_H__
@@ -25,11 +24,9 @@ extern "C" {
 #endif
 
 /**
- * @defgroup EFL_EXTENSION_EVENTS_GROUP Efl Extension Event
- * @ingroup EFL_EXTENSION_GROUP
- * @brief This group provides functionalities to handle back/send key events.
- * @since_tizen 2.3
- *
+ * @defgroup CAPI_EFL_EXTENSION_EVENT_MODULE Efl Extension Event
+ * @ingroup CAPI_EFL_EXTENSION_MODULE
+ * @brief This module provides functionalities to handle back/send key events.
  * @{
  */
 
@@ -45,7 +42,9 @@ extern "C" {
  * @param[in] event_info event information
  *
  * @see   eext_object_event_callback_add()
- * @since_tizen 2.3
+ * @if MOBILE @since_tizen 2.3
+ * @elseif WEARABLE @since_tizen 2.3.1
+ * @endif
  */
 static inline void
 eext_popup_back_cb(void *data, Evas_Object *obj, void *event_info)
@@ -65,7 +64,9 @@ eext_popup_back_cb(void *data, Evas_Object *obj, void *event_info)
  * @param[in] event_info event information
  *
  * @see   eext_object_event_callback_add()
- * @since_tizen 2.3
+ * @if MOBILE @since_tizen 2.3
+ * @elseif WEARABLE @since_tizen 2.3.1
+ * @endif
  */
 static inline void
 eext_ctxpopup_back_cb(void *data, Evas_Object *obj, void *event_info)
@@ -77,15 +78,17 @@ eext_ctxpopup_back_cb(void *data, Evas_Object *obj, void *event_info)
  * @brief Convenient macro function that sends more key events to the naviframe
  *        top item.
  *
- * @details Ctxpopup will be shown/hidden when naviframe has the more key event
- *          with eext_object_event_callback_add()
+ * @details More key action of naviframe will be executed when naviframe has the
+ *          more key event with eext_object_event_callback_add()
  *
  * @param[in] data user data
  * @param[in] obj target object
  * @param[in] event_info event information
  *
  * @see   eext_object_event_callback_add()
- * @since_tizen 2.3
+ * @if MOBILE @since_tizen 2.3
+ * @elseif WEARABLE @since_tizen 2.3.1
+ * @endif
  */
 static inline void
 eext_naviframe_more_cb(void *data, Evas_Object *obj, void *event_info)
@@ -96,8 +99,6 @@ eext_naviframe_more_cb(void *data, Evas_Object *obj, void *event_info)
                                                             "toolbar_more_btn");
    if (more_btn)
      evas_object_smart_callback_call(more_btn, "clicked", NULL);
-   else
-     elm_object_item_signal_emit(top, "elm,action,more_event", "");
 }
 
 /**
@@ -111,7 +112,9 @@ eext_naviframe_more_cb(void *data, Evas_Object *obj, void *event_info)
  * @param[in] event_info event information
  *
  * @see   eext_object_event_callback_add()
- * @since_tizen 2.3
+ * @if MOBILE @since_tizen 2.3
+ * @elseif WEARABLE @since_tizen 2.3.1
+ * @endif
  */
 static inline void
 eext_naviframe_back_cb(void *data, Evas_Object *obj, void *event_info)
@@ -124,7 +127,9 @@ eext_naviframe_back_cb(void *data, Evas_Object *obj, void *event_info)
  *
  * @see eext_object_event_callback_add()
  * @see eext_object_event_callback_del()
- * @since_tizen 2.3
+ * @if MOBILE @since_tizen 2.3
+ * @elseif WEARABLE @since_tizen 2.3.1
+ * @endif
  */
 typedef enum _Eext_Callback_Type
 {
@@ -141,7 +146,9 @@ typedef enum _Eext_Callback_Type
  * @param[in] event_info event information (if the event passes an additional in
               formation.)
  * @see eext_object_event_callback_add()
- * @since_tizen 2.3
+ * @if MOBILE @since_tizen 2.3
+ * @elseif WEARABLE @since_tizen 2.3.1
+ * @endif
  */
 typedef void (*Eext_Event_Cb)(void *data, Evas_Object *obj, void *event_info);
 
@@ -162,7 +169,9 @@ typedef void (*Eext_Event_Cb)(void *data, Evas_Object *obj, void *event_info);
  * @return    data The data pointer that was to be passed to the callback.
  *
  * @see eext_object_event_callback_add()
- * @since_tizen 2.3
+ * @if MOBILE @since_tizen 2.3
+ * @elseif WEARABLE @since_tizen 2.3.1
+ * @endif
  */
 EAPI void *eext_object_event_callback_del(Evas_Object *obj, Eext_Callback_Type type, Eext_Event_Cb func);
 
@@ -191,7 +200,9 @@ EAPI void *eext_object_event_callback_del(Evas_Object *obj, Eext_Callback_Type t
  * @param[in] data The data pointer to be passed to @p func.
  *
  * @see eext_object_event_callback_del()
- * @since_tizen 2.3
+ * @if MOBILE @since_tizen 2.3
+ * @elseif WEARABLE @since_tizen 2.3.1
+ * @endif
  */
 EAPI void eext_object_event_callback_add(Evas_Object *obj, Eext_Callback_Type type, Eext_Event_Cb func, void *data);
 
@@ -203,7 +214,9 @@ EAPI void eext_object_event_callback_add(Evas_Object *obj, Eext_Callback_Type ty
  * @param[in] event_info event information
  *
  * @see   eext_entry_selection_back_event_allow_set()
- * @since_tizen 2.3
+ * @if MOBILE @since_tizen 2.3
+ * @elseif WEARABLE @since_tizen 2.3.1
+ * @endif
  */
 static inline void
 eext_entry_back_cb(void *data, Evas_Object *obj, void *event_info)
@@ -226,7 +239,9 @@ eext_entry_back_cb(void *data, Evas_Object *obj, void *event_info)
  * @param[in] event_info event information
  *
  * @see   eext_entry_selection_back_event_allow_set()
- * @since_tizen 2.3
+ * @if MOBILE @since_tizen 2.3
+ * @elseif WEARABLE @since_tizen 2.3.1
+ * @endif
  */
 static inline void
 eext_entry_selection_start_cb(void *data, Evas_Object *obj, void *event_info)
@@ -248,7 +263,9 @@ eext_entry_selection_start_cb(void *data, Evas_Object *obj, void *event_info)
  *
  * @see   eext_entry_selection_back_event_allow_set()
  * @see   eext_object_event_callback_add()
- * @since_tizen 2.3
+ * @if MOBILE @since_tizen 2.3
+ * @elseif WEARABLE @since_tizen 2.3.1
+ * @endif
  */
 static inline void
 eext_entry_selection_cleared_cb(void *data, Evas_Object *obj, void *event_info)
@@ -270,7 +287,9 @@ eext_entry_selection_cleared_cb(void *data, Evas_Object *obj, void *event_info)
  *              otherwise.
  * @see   eext_object_event_callback_add()
  * @see   eext_object_event_callback_del()
- * @since_tizen 2.3
+ * @if MOBILE @since_tizen 2.3
+ * @elseif WEARABLE @since_tizen 2.3.1
+ * @endif
  */
 static inline void
 eext_entry_selection_back_event_allow_set(Evas_Object *obj, Eina_Bool allow)

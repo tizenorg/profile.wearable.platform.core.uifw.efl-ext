@@ -1,18 +1,17 @@
 /*
- * Copyright (c) 2013 Samsung Electronics Co., Ltd All Rights Reserved
+ * Copyright (c) 2013 Samsung Electronics Co., Ltd. All rights reserved.
  *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
+ * Licensed under the Flora License, Version 1.1 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *     http://floralicense.org/license/
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 #include "efl_extension.h"
@@ -37,11 +36,13 @@ _magic_string_get(eext_magic m)
 __CONSTRUCTOR__ static void
 eext_mod_init(void)
 {
+   LOGI("Init");
 }
 
 __DESTRUCTOR__ static void
 eext_mod_shutdown(void)
 {
+   LOGI("Shutdown\n");
 }
 
 
@@ -72,22 +73,3 @@ _eext_magic_fail(const void *d, eext_magic m, eext_magic req_m, const char *fnam
  *                                  API                                      *
  *===========================================================================*/
 
-EAPI Eina_Bool
-eext_win_keygrab_set(Elm_Win *obj, const char *key)
-{
-   Eina_Bool ret = EINA_FALSE;
-   ret = elm_win_keygrab_set(obj, key, 0, 0, 0, ELM_WIN_KEYGRAB_TOPMOST);
-   if (!ret)
-     LOGE("  Can't set keygrab of [%s].", key);
-   return ret;
-}
-
-EAPI Eina_Bool
-eext_win_keygrab_unset(Elm_Win *obj, const char *key)
-{
-   Eina_Bool ret = EINA_FALSE;
-   ret = elm_win_keygrab_unset(obj, key, 0, 0);
-   if (!ret)
-     LOGE("  Can't unset keygrab of [%s].", key);
-   return ret;
-}
