@@ -27,7 +27,7 @@ EAPI Eina_Bool
 eext_rotary_event_handler_add(Eext_Rotary_Handler_Cb func, void *data)
 {
    /* This function is disabled temporarily because of X11 dependency. */
-   return EINA_FALSE;
+   return EINA_TRUE;
 }
 
 EAPI void *
@@ -41,14 +41,14 @@ EAPI Eina_Bool
 eext_rotary_object_event_callback_add(Evas_Object *obj, Eext_Rotary_Event_Cb func, void *data)
 {
    /* This function is disabled temporarily because of X11 dependency. */
-   return EINA_FALSE;
+   return EINA_TRUE;
 }
 
 EAPI Eina_Bool
 eext_rotary_object_event_callback_priority_add(Evas_Object *obj, Eext_Callback_Priority priority, Eext_Rotary_Event_Cb func, void *data)
 {
    /* This function is disabled temporarily because of X11 dependency. */
-   return EINA_FALSE;
+   return EINA_TRUE;
 }
 
 EAPI void *
