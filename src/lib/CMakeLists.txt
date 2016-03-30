@@ -17,13 +17,35 @@ SET(LIB_SRCS
 ADD_LIBRARY(${LIB_NAME} SHARED ${LIB_SRCS})
 
 ADD_DEFINITIONS("-DEXPORT_API=__attribute__((visibility(\"default\")))")
-PKG_CHECK_MODULES(LIB_PKGS REQUIRED
+IF(DEFINED WITH_X)
+	message("Build with X")
+	ADD_DEFINITIONS("-DWITH_X")
+	PKG_CHECK_MODULES(LIB_PKGS REQUIRED
 		ecore
+		ecore-x
+		elementary
+		dlog
+		cairo
+		x11
+		xext
+		xi
+		inputproto
+		fontconfig
+		)
+ENDIF()
+IF(DEFINED WITH_WAYLAND)
+	message("Build with Wayland")
+	ADD_DEFINITIONS("-DWITH_WAYLAND")
+	PKG_CHECK_MODULES(LIB_PKGS REQUIRED
+		ecore
+		ecore-wayland
+		ecore-input
 		elementary
 		dlog
 		cairo
 		fontconfig
 		)
+ENDIF()
 
 FOREACH(flag ${LIB_PKGS_CFLAGS})
 	SET(LIB_CFLAGS "${LIB_CFLAGS} ${flag}")

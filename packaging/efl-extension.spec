@@ -1,3 +1,4 @@
+%define server wayland
 Name:       efl-extension
 Summary:    EFL extension library
 Version:    0.1.7
@@ -13,6 +14,16 @@ BuildRequires:  pkgconfig(fontconfig)
 BuildRequires:  cmake
 BuildRequires:  gettext
 BuildRequires:  pkgconfig(cairo)
+%if "%{?server}" == "x"
+BuildRequires:  pkgconfig(ecore-x)
+BuildRequires:  pkgconfig(x11)
+BuildRequires:  pkgconfig(xext)
+BuildRequires:  pkgconfig(xi)
+BuildRequires:  pkgconfig(inputproto)
+%else if "%{?server}" == "wayland"
+BuildRequires:  pkgconfig(ecore-wayland)
+BuildRequires:  pkgconfig(ecore-input)
+%endif
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 
@@ -39,8 +50,16 @@ EFL extension library providing small utility functions (devel)
 export CFLAGS+=" -fvisibility=hidden -fPIC -Wall"
 export LDFLAGS+=" -fvisibility=hidden -Wl,-z,defs -Wl,--hash-style=both -Wl,--as-needed"
 
+%if "%{?server}" == "x"
+cmake \
+	. -DCMAKE_INSTALL_PREFIX=/usr -DWITH_X=1
+%else if "%{?server}" == "wayland"
+cmake \
+	. -DCMAKE_INSTALL_PREFIX=/usr -DWITH_WAYLAND=1
+%else
 cmake \
 	. -DCMAKE_INSTALL_PREFIX=/usr
+%endif
 
 make %{?jobs:-j%jobs}
 
