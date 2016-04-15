@@ -695,7 +695,10 @@ _eext_circle_surface_add(Evas_Object *parent, Eext_Circle_Surface_Type type)
    if (!parent) return NULL;
 
    if (type != EEXT_CIRCLE_SURFACE_TYPE_NAVIFRAME)
-     image_widget = elm_image_add(parent);
+     {
+        image_widget = elm_image_add(parent);
+		evas_object_repeat_events_set(image_widget, EINA_TRUE);
+	 }
 
    surface = _eext_circle_surface_init(image_widget, parent, type);
 
