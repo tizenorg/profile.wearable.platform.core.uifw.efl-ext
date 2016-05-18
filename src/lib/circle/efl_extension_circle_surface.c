@@ -21,6 +21,28 @@
 static void _eext_circle_surface_del_internal(Eext_Circle_Surface *surface);
 static void _eext_circle_surface_render(void *data);
 
+static Evas_Object *
+_eext_circle_surface_image_widget_add(Evas_Object *parent)
+{
+   Evas_Object *image_widget;
+
+   image_widget = elm_image_add(parent);
+   if (!image_widget)
+     {
+        LOGE("Failed to create elm_image_object");
+        return NULL;
+     }
+
+   //FIXME: It's for adjusting evas_image geometry.
+   //       Image object has weird geometry during the window calc own size since tizen_3.0.
+   //       We need to recalc image object after buffer memory copy in render time.
+   //       But now we don't have any way to call image's internal sizing eval function.
+   elm_image_aspect_fixed_set(image_widget, 0);
+   evas_object_repeat_events_set(image_widget, EINA_TRUE);
+
+   return image_widget;
+}
+
 static void
 _eext_circle_surface_cairo_draw_arc(cairo_t *cairo,
                                     int line_width,
@@ -304,7 +326,7 @@ _eext_circle_surface_show_cb(void *data, Evas *e, Evas_Object *obj, void *event_
    if ((surface->type != EEXT_CIRCLE_SURFACE_TYPE_NAVIFRAME) &&
        (surface->type != EEXT_CIRCLE_SURFACE_TYPE_PRIVATE))
      {
-        surface->image_widget = elm_image_add(surface->parent);
+        surface->image_widget = _eext_circle_surface_image_widget_add(surface->parent);
         evas_object_event_callback_add(surface->image_widget, EVAS_CALLBACK_DEL, _eext_circle_surface_del_cb, surface);
         evas_object_event_callback_add(surface->image_widget, EVAS_CALLBACK_RESIZE, _eext_circle_surface_resize_cb, surface);
         elm_object_part_content_set(surface->parent, "elm.swallow.circle", surface->image_widget);
@@ -695,10 +717,7 @@ _eext_circle_surface_add(Evas_Object *parent, Eext_Circle_Surface_Type type)
    if (!parent) return NULL;
 
    if (type != EEXT_CIRCLE_SURFACE_TYPE_NAVIFRAME)
-     {
-        image_widget = elm_image_add(parent);
-        evas_object_repeat_events_set(image_widget, EINA_TRUE);
-     }
+     image_widget = _eext_circle_surface_image_widget_add(parent);
 
    surface = _eext_circle_surface_init(image_widget, parent, type);
 
