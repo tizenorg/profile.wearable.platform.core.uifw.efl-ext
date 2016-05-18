@@ -165,6 +165,12 @@ _eext_circle_object_init(Evas_Object *obj, Evas_Object *widget_obj, Eext_Circle_
 
    evas_object_data_set(obj, EEXT_CIRCLE_OBJECT_TYPE, circle_obj);
 
+   //FIXME: It's for adjusting evas_image geometry.
+   //       Image object has weird geometry during the window calc own size since tizen_3.0.
+   //       We need to recalc image object after buffer memory copy in render time.
+   //       But now we don't have any way to call image's internal sizing eval function.
+   elm_image_aspect_fixed_set(obj, 0);
+
    evas_object_event_callback_add(obj, EVAS_CALLBACK_DEL, _eext_circle_object_del_cb, circle_obj);
    evas_object_event_callback_add(obj, EVAS_CALLBACK_SHOW, _eext_circle_object_show_cb, circle_obj);
    evas_object_event_callback_add(obj, EVAS_CALLBACK_HIDE, _eext_circle_object_hide_cb, circle_obj);
