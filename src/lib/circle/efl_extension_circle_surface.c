@@ -37,7 +37,7 @@ _eext_circle_surface_image_widget_add(Evas_Object *parent)
    //       Image object has weird geometry during the window calc own size since tizen_3.0.
    //       We need to recalc image object after buffer memory copy in render time.
    //       But now we don't have any way to call image's internal sizing eval function.
-   elm_image_aspect_fixed_set(image_widget, 0);
+   elm_image_aspect_fixed_set(image_widget, EINA_FALSE);
    evas_object_repeat_events_set(image_widget, EINA_TRUE);
 
    return image_widget;
