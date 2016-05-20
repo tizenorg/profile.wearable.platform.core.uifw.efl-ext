@@ -292,7 +292,7 @@ _eext_circle_text_font_get(const char *text, const char *font_family)
      return NULL;
 
    // Going to use first character.
-   u_str = eina_unicode_utf8_get_next(text, &u_str_index);
+   u_str = eina_unicode_utf8_next_get(text, &u_str_index);
 
    // Query font using FontConfig.
    c_set = FcCharSetCreate();
