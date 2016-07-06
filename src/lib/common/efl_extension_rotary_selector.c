@@ -1952,6 +1952,9 @@ eext_rotary_selector_item_part_content_set(Eext_Object_Item *item, const char *p
                }
 
              rotary_selector_item->item_bg_image.normal = content;
+             // FIXME : I think then default content should be the pressed content as default.
+             //         This thing should be talked with UX team to define.
+             rotary_selector_item->item_bg_image.pressed = content;
           }
         else if (!strcmp(part_name, "item,icon"))
           {
@@ -1967,6 +1970,9 @@ eext_rotary_selector_item_part_content_set(Eext_Object_Item *item, const char *p
                }
 
              rotary_selector_item->item_icon.normal = content;
+             // FIXME : I think then default content should be the pressed content as default.
+             //         This thing should be talked with UX team to define.
+             rotary_selector_item->item_icon.pressed = content;
           }
         else if (!strcmp(part_name, "selector,icon"))
           {
